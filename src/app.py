@@ -17,7 +17,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app)
 
 
-
+#Models
 class Profile(db.Model):
   
     id = db.Column(db.Integer, primary_key=True)
@@ -25,7 +25,7 @@ class Profile(db.Model):
     last_name = db.Column(db.String(20), unique=False, nullable=False)
     
 
- 
+ # represent objects of the data table.
     def __repr__(self):
         return f"Name : {self.first_name}"
 
