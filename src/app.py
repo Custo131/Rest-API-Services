@@ -1,5 +1,8 @@
+
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+
+
 
 #creating a Flask app
 
@@ -10,8 +13,22 @@ app.debug = True
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 
 
-#Creating and SQLAchemy instance
+#Initializing SQLAlchemy with app
 db = SQLAlchemy(app)
+
+
+
+class Profile(db.Model):
+  
+    id = db.Column(db.Integer, primary_key=True)
+    first_name = db.Column(db.String(20), unique=False, nullable=False)
+    last_name = db.Column(db.String(20), unique=False, nullable=False)
+    
+
+ 
+    def __repr__(self):
+        return f"Name : {self.first_name}"
+
 
 
 
