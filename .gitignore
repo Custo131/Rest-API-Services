@@ -1,0 +1,47 @@
+# General Python ignores
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment (if using venv manually)
+venv/
+ENV/
+env/
+
+# Installed dependencies
+*.egg-info/
+dist/
+build/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Alembic migration cache
+alembic/versions/*.pyc
+alembic/versions/*.pyo
+alembic/versions/*.pyd
+
+# SQLite database file
+*.sqlite3
+*.db
+
+# Editor & OS-Specific Files
+.vscode/
+.idea/
+.DS_Store
+
+# Compiled Python Artifacts
+*.pyc
+*.pyo
+*.pyd
+
+# Log & Debugging Files
+logs/
+*.log
+*.out
+
+# Docker-specific ignores
+.dockerignore
+docker-compose.override.yml
