@@ -14,9 +14,11 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 
 #Declarative base for ORM models
-Base = DeclarativeBase()
+class Base (DeclarativeBase):
+    pass
 
-# 
+
+# Creating tables if they are not existing
 def init_db():
     Base.metadata.create_all(bind=engine)
 
