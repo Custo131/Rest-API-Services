@@ -1,30 +1,13 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy.orm import DeclarativeBase
+from config import DATABASE_URL
 
 
-#connect to a SQLite database stored in a file called test.db
-sqlite_url = "sqlite:///test.db"
 
-
-## Create the engine and sessionmaker
-engine = create_engine(sqlite_url,connect_args={"check_same_thread":False})
+engine = create_engine(DATABASE_URL,connect_args={"check_same_thread":False})
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 
-
-#Declarative base for ORM models
-class Base (DeclarativeBase):
-    pass
-
-
-# Creating tables if they are not existing
-def init_db():
-    Base.metadata.create_all(bind=engine)
-
-
-
-#Dependency to get the database session
 def get_db():
     db = SessionLocal()
     try:
