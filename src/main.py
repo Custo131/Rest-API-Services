@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Depends, Response
 from http import HTTPStatus
-from database import get_db
+from src.database import get_db
 
 
 app = FastAPI()
