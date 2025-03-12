@@ -8,12 +8,12 @@ router = APIRouter()
 
 # Pydantic models for validation
 class UserCreate(BaseModel):
-    name: str
+    username: str
     email: str
 
 class UserResponse(BaseModel):
     id: int
-    name: str
+    username: str
     email: str
     #Converting SQLAlchemy model into pydantic model
     class Config:
@@ -25,7 +25,7 @@ def create_user(user: UserCreate, db: Session = Depends(get_db)):
     db_user = db.query(User).filter(User.email == user.email).first()
     if db_user:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Email already registered")
-    new_user = User(name=user.name, email=user.email)
+    new_user = User(username=user.username, email=user.email)
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
