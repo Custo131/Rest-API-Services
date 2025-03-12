@@ -12,7 +12,7 @@ Base.metadata.create_all(bind=engine)
 
 class User(Base):
     __tablename__ = "users"
-    _id = Column(Integer, primary_key=True)
+    id = Column(Integer, primary_key=True)
     username = Column(String(150), unique=True, nullable=False)
     email = Column(String(150), unique=True, nullable=False)
     password = Column(String(150))
