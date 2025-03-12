@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Depends, Response
 from http import HTTPStatus
 from src.database import get_db
-from routes import router 
+from src.routes import router 
 
 
 

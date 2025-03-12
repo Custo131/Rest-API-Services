@@ -1,6 +1,6 @@
 
 from sqlalchemy.orm import DeclarativeBase
-from database import engine
+from src.database import engine
 from sqlalchemy import Column,String,  Integer, DateTime, ForeignKey, func
 from sqlalchemy.orm import relationship, declarative_base
 
