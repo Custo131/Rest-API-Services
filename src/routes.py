@@ -10,6 +10,7 @@ router = APIRouter()
 class UserCreate(BaseModel):
     username: str
     email: str
+    password: str
 
 class UserResponse(BaseModel):
     id: int
@@ -18,6 +19,9 @@ class UserResponse(BaseModel):
     #Converting SQLAlchemy model into pydantic model
     class Config:
         from_attributes = True
+class Token(BaseModel):
+    access_token: str
+    token_type: str
 
 # Creating a new user
 @router.post("/users", response_model=UserResponse, status_code=status.HTTP_201_CREATED)
