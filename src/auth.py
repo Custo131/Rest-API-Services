@@ -1,29 +1,36 @@
 from passlib.context import CryptContext
 import jwt
 from datetime import datetime, timedelta
-from dotenv import load_dotenv
-import os
+from src.config import SECRET_KEY
+from src.config import ACCESS_TOKEN_EXPIRE_MINUTES
+from src.config import ALGORITHM
+from fastapi.security import OAuth2PasswordBearer
+from datetime import datetime, timezone, timedelta
 
-#Load environment variables
 
-load_dotenv()
 
-SECRET_KEY = os.getenv("SECRET_KEY")
-ALGORITHM = os.getenv("ALGORITHM")
-ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES"))
+
+
+
 
 #Initializing context for hashing passwords 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-#compare password and hashed password
-def verify_password(plain_password, hashed_password):
-    return pwd_context.verify(plain_password, hashed_password)
+
+# Define the OAuth2 scheme for token-based authentication
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/token")
+
 #converting passwd to hashed password
 def get_password_hash(password):
     return pwd_context.hash(password)
 
+#compare password and hashed password
+def verify_password(plain_password, hashed_password):
+    return pwd_context.verify(plain_password, hashed_password)
+
+#Updating datetime 
 def create_access_token(data: dict):
     to_encode = data.copy()
-    expire = datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    expire = datetime.now(timezone.utc) + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     to_encode.update({"exp": expire})
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
     return encoded_jwt
@@ -39,4 +46,7 @@ def verify_token(token: str):
         return username 
     except jwt.PyJWTError:
         return None
+    
+    
+
 
